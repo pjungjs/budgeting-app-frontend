@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import NavBar from "./Components/NavBar.jsx";
@@ -9,15 +10,17 @@ import Edit from "./Pages/Edit.jsx";
 import Error from "./Pages/Error.jsx";
 
 function App() {
+  const [balance, setBalance] = useState(0);
+
   return (
     <div className="App">
       <header>
-        <NavBar />
+        <NavBar balance={balance} />
       </header>
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/transactions" element={<Index />} />
+          <Route path="/transactions" element={<Index setBalance={setBalance} />} />
           <Route path="/transactions/new" element={<New />} />
           <Route path="/transactions/:id" element={<Show />} />
           <Route path="/transactions/:id/edit" element={<Edit />} />

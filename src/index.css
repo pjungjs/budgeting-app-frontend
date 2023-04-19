@@ -1,32 +1,51 @@
+:root {
+  --darkBlue: #02243c;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Verdana, Tahoma, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.positive {
+  color: green;
 }
 
-.App {
+.negative {
+  color: red;
+}
+
+
+/********** App.js **********/
+.App main {
+  margin: 10px 30px;
+}
+
+
+/********** NavBar.jsx **********/
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2em 3em;
+  background: lightseagreen;
+  box-shadow: 2px 2px 4px grey;
+}
+
+
+nav a {
+  text-decoration: none;
+}
+
+
+/********** Index.jsx >>> TxnAll.jsx >>> TxnIndividual.jsx **********/
+thead th,
+tbody td {
+  padding: 8px;
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+tbody tr a {
+  color: inherit;
+  text-decoration: none;
 }

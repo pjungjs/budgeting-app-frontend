@@ -1,10 +1,11 @@
-import Txn from "../Components/Txn.jsx";
 
-function Index() {
+import TxnAll from "../Components/TxnAll.jsx";
+
+function Index({ setBalance }) {
   return (
     <div className="index">
       <h1>Index</h1>
-      <Txn />
+      <TxnAll setBalance={setBalance} />
     </div>
   );
 }
