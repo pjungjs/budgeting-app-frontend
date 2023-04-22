@@ -9,25 +9,20 @@ function TxnAll({ setBalance }) {
   useEffect(() => {
     axios
       .get(`${API}/transactions`)
-      .then(response => setAllTxn(response.data))
+      .then(response => {
+        let total = 0;
+        response.data.forEach(txn => {
+          if (txn.category.toLowerCase() === "income") {
+            total += parseInt(txn.amount);
+          } else if (txn.category.toLowerCase() === "expense") {
+            total -= parseInt(txn.amount);
+          }
+        })
+        setBalance(total);
+        setAllTxn(response.data);
+      })
       .catch(error => console.error("Error: GET", error))
   }, []);
-
-  useEffect(() => {
-    calculateBalance();
-  }, [allTxn])
-
-  function calculateBalance() {
-    let total = 0;
-    allTxn.forEach(txn => {
-      if (txn.category.toLowerCase() === "income") {
-        total += txn.amount;
-      } else if (txn.category.toLowerCase() === "expense") {
-        total -= txn.amount;
-      }
-    })
-    setBalance(total);
-  }
 
   return (
     <div className="all">

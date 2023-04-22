@@ -1,22 +1,8 @@
 import { Link } from "react-router-dom";
+import { properAmount, properDate, properWord } from "../proper.js";
 
 function TxnIndividual({ txn }) {
   const { id, item_name, amount, date, category } = txn;
-
-  function properDate(day) {
-    return day;
-  }
-
-  function properWord(words) {
-    return words.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-  }
-
-  function properAmount(number) {
-    return number.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    })
-  }
 
   function categoryColor() {
     return category.toLowerCase() === "income"
@@ -37,7 +23,7 @@ function TxnIndividual({ txn }) {
         </Link>
       </td>
       <td className={`${categoryColor()}`}>
-        {properAmount(amount)}
+        {properAmount(parseInt(amount))}
       </td>
     </tr>
   )

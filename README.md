@@ -4,6 +4,8 @@
 
 - [Final Full Stack Repo](https://github.com/pjungjs/budgeting-app-project)
 
+- [Backend Repo](https://github.com/pjungjs/budgeting-app-backend)
+
 ---
 
 ### Technologies Used
