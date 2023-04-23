@@ -25,15 +25,17 @@ function TxnAll({ setBalance }) {
   }, []);
 
   return (
-    <div className="all">
-      <h1>All Transactions</h1>
+    <div className="flex flex-col items-center mx-10">
+      <h1 className="text-xl font-bold mb-4">All Transactions</h1>
       <section>
-        <table>
-          <thead>
+        <table className="table-fixed border-black border-2 text-center w-full">
+          <thead className="bg-indigo-400 text-white">
             <tr>
-              <th>Date</th>
-              <th>Title</th>
-              <th>Amount</th>
+              <th className="p-2 text-lg">Date</th>
+              <th className="p-2 text-lg">Item Name</th>
+              <th className="p-2 text-lg">From/To</th>
+              <th className="p-2 text-lg">Tag</th>
+              <th className="p-2 text-lg">Amount</th>
             </tr>
           </thead>
           <tbody>

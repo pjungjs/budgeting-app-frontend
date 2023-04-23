@@ -6,12 +6,15 @@
 
 - [Backend Repo](https://github.com/pjungjs/budgeting-app-backend)
 
+- [Frontend](https://jj-budgeting-app.netlify.app) deployed on Netlify
+
 ---
 
 ### Technologies Used
 
 * JavaScript
 * React
+* Tailwind CSS
 * NPM (axios, react-router-dom, dotenv)
 
 ---

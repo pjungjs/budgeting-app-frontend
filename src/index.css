@@ -1,51 +1,8 @@
-:root {
-  --darkBlue: #02243c;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;
   font-family: Verdana, Tahoma, sans-serif;
-}
-
-.positive {
-  color: green;
-}
-
-.negative {
-  color: red;
-}
-
-
-/********** App.js **********/
-.App main {
-  margin: 10px 30px;
-}
-
-
-/********** NavBar.jsx **********/
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2em 3em;
-  background: lightseagreen;
-  box-shadow: 2px 2px 4px grey;
-}
-
-
-nav a {
-  text-decoration: none;
-}
-
-
-/********** Index.jsx >>> TxnAll.jsx >>> TxnIndividual.jsx **********/
-thead th,
-tbody td {
-  padding: 8px;
-  text-align: center;
-}
-
-tbody tr a {
-  color: inherit;
-  text-decoration: none;
 }

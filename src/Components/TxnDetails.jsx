@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { properAmount, properDate, properWord, categoryColor } from "../proper.js";
 const API = process.env.REACT_APP_API_URL;
 
 function TxnDetails() {
@@ -20,52 +19,63 @@ function TxnDetails() {
   }, [id]);
 
   function handleDelete() {
-    axios
-      .delete(`${API}/transactions/${id}`)
-      .then(() => navigate('/transactions'))
-      .catch(error => console.error("Error: DELETE", error))
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      axios
+        .delete(`${API}/transactions/${id}`)
+        .then(() => navigate('/transactions'))
+        .catch(error => console.error("Error: DELETE", error))
+    }
   }
 
   return (
-    <div className="details">
-      <h1>Details</h1>
-      <p>Title: {item_name}</p>
-      <p>Amount: {amount}</p>
-      <p>Date: {date}</p>
-      <p>
-        {
-          category === "income"
-          ? "From: "
-          : category === "expense"
-            ? "To: "
-            : null
-        }
-        {from_to}
-      </p>
-      <p>
-        {
-          tag
-          ? `Tag: ${tag}`
-          : null
-        }
-      </p>
-      <p>
-        {
-          note
-          ? `Note: ${note}`
-          : null
-        }
-      </p>
-      <p>Category: {category}</p>
-
-      <Link to="/transactions">
-        <button>Back</button>
-      </Link>
-      <Link to={`/transactions/${id}/edit`}>
-        <button>Edit</button>
-      </Link>
-      <button onClick={handleDelete}>Delete</button>
-    </div>
+    <>
+      <h1 className="text-xl font-bold mb-4 flex flex-col items-center">Details</h1>
+      <div className="pt-0 p-5 mx-auto shadow-lg bg-gray-200 rounded-lg">
+        <div className="px-4 py-5 my-4">
+          <p><strong>Title:</strong> {item_name}</p>
+          <p><strong>Amount:</strong> {amount}</p>
+          <p><strong>Date:</strong> {date}</p>
+          <p>
+            <strong>{
+              category === "income"
+              ? "From: "
+              : category === "expense"
+                ? "To: "
+                : null
+            }</strong>
+            {from_to}
+          </p>
+          <p>
+            <strong>{
+              tag
+              ? "Tag: "
+              : null
+            }</strong>
+            {tag}
+          </p>
+          <p>
+            <strong>{
+              note
+              ? "Note: "
+              : null
+            }</strong>
+            {note}
+          </p>
+          <p><strong>Category:</strong> {category}</p>
+        </div>
+        <div className="text-white flex justify-center">
+          <button className="mr-2 px-3 py-1 rounded-md bg-gray-600 hover:bg-gray-400">
+            <Link to="/transactions">Back</Link>
+          </button>
+          <button className="mr-2 px-3 py-1 rounded-md bg-indigo-600 hover:bg-indigo-400">
+            <Link to={`/transactions/${id}/edit`}>Edit</Link>
+          </button>
+          <button onClick={handleDelete} className="mr-2 px-3 py-1 rounded-md bg-red-600 hover:bg-red-400">
+            Delete
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 

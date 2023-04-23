@@ -2,8 +2,10 @@ import TxnNewForm from "../Components/TxnNewForm.jsx";
 
 function New() {
   return (
-    <div className="formnew">
-      <h1>New</h1>
+    <div className="p-5">
+      <h1 className="text-xl font-bold">
+        New
+      </h1>
       <TxnNewForm />
     </div>
   );

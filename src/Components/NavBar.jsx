@@ -4,13 +4,17 @@ import { properAmount } from "../proper.js";
 function NavBar({ balance }) {
 
   return (
-    <nav className="navbar">
-      <h1><Link to="/transactions">Bugetting App</Link></h1>
-      <p><Link to="/transactions/new">New Transaction</Link></p>
+    <nav className="bg-indigo-400 text-white p-4 flex space-x-14 text-2xl items-center justify-center">
+      <h1 className="hover:underline decoration-1 hover:text-gray-300">
+        <Link to="/transactions">View All</Link>
+      </h1>
       <p>{"Balance: "}
-        <span className={balance > 0 ? "positive" : balance < 0 ? "negative" : null}>
+        <span style={{"color": balance > 100 ? "green" : balance > 0 ? "yellow" : "red"}}>
           {properAmount(balance)}
         </span>
+      </p>
+      <p className="hover:underline decoration-1 hover:text-gray-300">
+        <Link to="/transactions/new">Add New</Link>
       </p>
     </nav>
   )
