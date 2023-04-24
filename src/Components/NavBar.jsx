@@ -8,7 +8,8 @@ function NavBar({ balance }) {
       <h1 className="hover:underline decoration-1 hover:text-gray-300">
         <Link to="/transactions">View All</Link>
       </h1>
-      <p>{"Balance: "}
+      <p>
+        {"Balance: "}
         <span style={{"color": balance > 100 ? "green" : balance > 0 ? "yellow" : "red"}}>
           {properAmount(balance)}
         </span>

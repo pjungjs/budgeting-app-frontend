@@ -135,11 +135,11 @@ function TxnEditForm() {
             </div>
           </div>
           <div className="flex space-x-4 justify-center">
-            <button type="submit" className="bg-indigo-500 text-white rounded-md px-4 py-2 mt-4 hover:bg-indigo-400">
-              Submit
-            </button>
             <button className="bg-indigo-500 text-white rounded-md px-4 py-2 mt-4 hover:bg-indigo-400">
               <Link to={`/transactions/${id}`}>Back</Link>
+            </button>
+            <button type="submit" className="bg-indigo-500 text-white rounded-md px-4 py-2 mt-4 hover:bg-indigo-400">
+              Submit
             </button>
           </div>
         </form>
