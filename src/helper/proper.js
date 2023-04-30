@@ -19,12 +19,14 @@ function properAmount(number) {
 }
 
 function properDate(date) {
-  return newDate = new Date(date).toLocaleDateString("en-US", {
-    weekday: "short",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  // const newDate = new Date(date).toLocaleDateString("en-US", {
+  //   weekday: "short",
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric",
+  // });
+  // return newDate;
+  return date;
 }
 
 function properWord(words) {
