@@ -7,21 +7,24 @@ function TxnAll({ setBalance }) {
   const [allTxn, setAllTxn] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${API}/transactions`)
-      .then(response => {
-        let total = 0;
-        response.data.forEach(txn => {
-          if (txn.category.toLowerCase() === "income") {
-            total += parseInt(txn.amount);
-          } else if (txn.category.toLowerCase() === "expense") {
-            total -= parseInt(txn.amount);
-          }
+    async function fetchData() {
+      await axios
+        .get(`${API}/transactions`)
+        .then(response => {
+          let total = 0;
+          response.data.forEach(txn => {
+            if (txn.category.toLowerCase() === "income") {
+              total += parseInt(txn.amount);
+            } else if (txn.category.toLowerCase() === "expense") {
+              total -= parseInt(txn.amount);
+            }
+          })
+          setBalance(total);
+          setAllTxn(response.data);
         })
-        setBalance(total);
-        setAllTxn(response.data);
-      })
-      .catch(error => console.error("Error: GET", error))
+        .catch(error => console.error("Error: GET", error))
+    }
+    fetchData();
   }, []);
 
   return (

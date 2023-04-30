@@ -10,17 +10,18 @@ function TxnDetails() {
   const { item_name, amount, date, from_to, tag, note, category } = theTxn;
 
   useEffect(() => {
-    axios
-      .get(`${API}/transactions/${id}`)
-      .then(response => {
-        setTheTxn(response.data)
-      })
-      .catch(error => console.error("Error: GET", error))
+    async function fetchData() {
+      await axios
+        .get(`${API}/transactions/${id}`)
+        .then(response => setTheTxn(response.data))
+        .catch(error => console.error("Error: GET", error))
+    }
+    fetchData();
   }, [id]);
 
-  function handleDelete() {
+  async function handleDelete () {
     if (window.confirm("Are you sure you want to delete this item?")) {
-      axios
+      await axios
         .delete(`${API}/transactions/${id}`)
         .then(() => navigate('/transactions'))
         .catch(error => console.error("Error: DELETE", error))

@@ -18,26 +18,29 @@ function TxnNewForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`${API}/transactions`)
-      .then(response => {
-        setNewId(parseInt(response.data[response.data.length-1].id) + 1);
-      })
-      .catch(error => console.error("Error: GET", error))
+    async function fetchData() {
+      await axios
+        .get(`${API}/transactions`)
+        .then(response => {
+          setNewId(parseInt(response.data[response.data.length-1].id) + 1);
+        })
+        .catch(error => console.error("Error: GET", error))
+    }
+    fetchData();
   }, []);
 
-  function handleTextChange(event) {
-    setNewTxn({ ...newTxn, id: newId, [event.target.id]: event.target.value });
-  };
-
-  function addTxn() {
-    axios
+  async function addTxn() {
+    await axios
       .post(`${API}/transactions`, newTxn)
       .then(() => {
         navigate(`/transactions`);
       })
       .catch((error) => console.warn("Error: POST", error))
   }
+
+  function handleTextChange(event) {
+    setNewTxn({ ...newTxn, id: newId, [event.target.id]: event.target.value });
+  };
 
   function handleSubmit(event) {
     event.preventDefault();

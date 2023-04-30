@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { properAmount } from "../proper.js";
+import { properAmount } from "../helper/proper.js";
 
 function NavBar({ balance }) {
 

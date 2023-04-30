@@ -18,18 +18,17 @@ function TxnEditForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`${API}/transactions/${id}`)
-      .then((response) => setEditTxn(response.data))
-      .catch((error) => console.error("Error: GET", error))
+    async function fetchData() {
+      await axios
+        .get(`${API}/transactions/${id}`)
+        .then((response) => setEditTxn(response.data))
+        .catch((error) => console.error("Error: GET", error))
+    }
+    fetchData();
   }, [id]);
 
-  function handleTextChange(event) {
-    setEditTxn({ ...editTxn, [event.target.id]: event.target.value });
-  };
-
-  function updateTxn() {
-    axios
+  async function updateTxn() {
+    await axios
       .put(`${API}/transactions/${id}`, editTxn)
       .then((response) => {
         setEditTxn(response.data);
@@ -37,6 +36,10 @@ function TxnEditForm() {
       })
       .catch((error) => console.warn("Error: PUT", error))
   }
+
+  function handleTextChange(event) {
+    setEditTxn({ ...editTxn, [event.target.id]: event.target.value });
+  };
 
   function handleSubmit(event) {
     event.preventDefault();

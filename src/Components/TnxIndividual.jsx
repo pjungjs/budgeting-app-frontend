@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { properAmount, properDate, properWord } from "../proper.js";
+import { properAmount, properDate, properWord } from "../helper/proper.js";
 
 function TxnIndividual({ txn }) {
   const { id, item_name, amount, date, from_to, tag, category } = txn;
