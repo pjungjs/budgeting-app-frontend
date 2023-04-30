@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { calculateAmount } from "../helper/proper.js";
 import TxnIndividual from "./TnxIndividual.jsx";
 const API = process.env.REACT_APP_API_URL;
 
@@ -11,15 +12,7 @@ function TxnAll({ setBalance }) {
       await axios
         .get(`${API}/transactions`)
         .then(response => {
-          let total = 0;
-          response.data.forEach(txn => {
-            if (txn.category.toLowerCase() === "income") {
-              total += parseInt(txn.amount);
-            } else if (txn.category.toLowerCase() === "expense") {
-              total -= parseInt(txn.amount);
-            }
-          })
-          setBalance(total);
+          setBalance(calculateAmount(response.data));
           setAllTxn(response.data);
         })
         .catch(error => console.error("Error: GET", error))
@@ -36,15 +29,15 @@ function TxnAll({ setBalance }) {
             <tr>
               <th className="p-2 text-lg">Date</th>
               <th className="p-2 text-lg">Item Name</th>
-              <th className="p-2 text-lg">From/To</th>
-              <th className="p-2 text-lg">Tag</th>
+              <th className="p-2 text-lg">From / To</th>
+              <th className="p-2 text-lg">Category</th>
               <th className="p-2 text-lg">Amount</th>
             </tr>
           </thead>
           <tbody>
             {
-              allTxn.map((txn, index) => {
-                return <TxnIndividual key={index} txn={txn} />
+              allTxn.map((txn) => {
+                return <TxnIndividual key={txn.id} txn={txn} />
               })
             }
           </tbody>

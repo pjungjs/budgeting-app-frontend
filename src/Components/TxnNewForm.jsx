@@ -11,9 +11,9 @@ function TxnNewForm() {
     amount: 0,
     date: "",
     from_to: "",
-    tag: "",
+    category: "",
     note: "",
-    category: "expense"
+    type: "withdrawal"
   });
   const navigate = useNavigate();
 
@@ -21,9 +21,7 @@ function TxnNewForm() {
     async function fetchData() {
       await axios
         .get(`${API}/transactions`)
-        .then(response => {
-          setNewId(parseInt(response.data[response.data.length-1].id) + 1);
-        })
+        .then(response => setNewId(parseInt(response.data[response.data.length-1].id) + 1))
         .catch(error => console.error("Error: GET", error))
     }
     fetchData();
@@ -32,9 +30,7 @@ function TxnNewForm() {
   async function addTxn() {
     await axios
       .post(`${API}/transactions`, newTxn)
-      .then(() => {
-        navigate(`/transactions`);
-      })
+      .then(() => navigate(`/transactions`))
       .catch((error) => console.warn("Error: POST", error))
   }
 
@@ -60,17 +56,19 @@ function TxnNewForm() {
                 type="text"
                 className="border border-gray-400 px-4 py-1 rounded w-full focus:outline-none focus:border-indigo-700"
                 value={newTxn.item_name}
+                placeholder="gas, takeout, etc."
                 onChange={handleTextChange}
                 required
               />
             </div >
             <div className="w-1/2">
-              <label htmlFor="from_to">*From/To: </label>
+              <label htmlFor="from_to">*From / To: </label>
               <input
                 id="from_to"
                 type="text"
                 className="border border-gray-400 px-4 py-1 rounded w-full focus:outline-none focus:border-indigo-700"
                 value={newTxn.from_to}
+                placeholder="shell, work, etc."
                 onChange={handleTextChange}
                 required
               />
@@ -103,13 +101,13 @@ function TxnNewForm() {
               />
             </div>
             <div className="w-1/2">
-              <label htmlFor="tag">Tag: </label>
+              <label htmlFor="category">Category: </label>
               <input
-                id="tag"
+                id="category"
                 type="text"
                 className="border border-gray-400 px-4 py-1 rounded w-full focus:outline-none focus:border-indigo-700"
                 placeholder="utility, subscription, etc."
-                value={newTxn.tag}
+                value={newTxn.category}
                 onChange={handleTextChange}
               />
             </div>
@@ -127,20 +125,20 @@ function TxnNewForm() {
               />
             </div>
             <div className="w-1/3">
-              <label htmlFor="category">**Category: </label>
+              <label htmlFor="type">**Type: </label>
               <select
-                id="category"
+                id="type"
                 className="border border-gray-400 px-4 py-1 rounded w-full focus:outline-none focus:border-indigo-700"
-                value={newTxn.category}
+                value={newTxn.type}
                 onChange={handleTextChange}
               >
-                <option value="expense" defaultValue>Expense</option>
-                <option value="income">Income</option>
+                <option value="withdrawal" defaultValue>Withdrawal</option>
+                <option value="deposit">Deposit</option>
               </select>
             </div>
           </div>
           <p>* are required</p>
-          <p>** has default value of "Expense"</p>
+          <p>** has default value of "Withdrawal"</p>
           <div className="flex space-x-4 justify-center">
             <button className="bg-indigo-500 text-white rounded-md px-4 py-2 mt-4 hover:bg-indigo-400">
               <Link to={`/transactions`}>Back</Link>

@@ -10,9 +10,9 @@ function TxnEditForm() {
     amount: 0,
     date: "",
     from_to: "",
-    tag: "",
+    category: "",
     note: "",
-    category: ""
+    type: ""
   });
   const { id } = useParams();
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ function TxnEditForm() {
               />
             </div >
             <div className="w-1/2">
-              <label htmlFor="from_to">From/To: </label>
+              <label htmlFor="from_to">From / To: </label>
               <input
                 id="from_to"
                 type="text"
@@ -102,12 +102,12 @@ function TxnEditForm() {
               />
             </div>
             <div className="w-1/2">
-              <label htmlFor="tag">Tag: </label>
+              <label htmlFor="category">Category: </label>
               <input
-                id="tag"
+                id="category"
                 type="text"
                 className="border border-gray-400 px-4 py-1 rounded w-full focus:outline-none focus:border-indigo-700"
-                value={editTxn.tag}
+                value={editTxn.category}
                 onChange={handleTextChange}
               />
             </div>
@@ -125,15 +125,15 @@ function TxnEditForm() {
               />
             </div>
             <div className="w-1/3">
-              <label htmlFor="category">Category: </label>
+              <label htmlFor="type">Type: </label>
               <select
-                id="category"
+                id="type"
                 className="border border-gray-400 px-4 py-1 rounded w-full focus:outline-none focus:border-indigo-700"
-                value={editTxn.category}
+                value={editTxn.type}
                 onChange={handleTextChange}
               >
-                <option value="expense">Expense</option>
-                <option value="income">Income</option>
+                <option value="withdrawal">Withdrawal</option>
+                <option value="deposit">Deposit</option>
               </select>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import NavBar from "./Components/NavBar.jsx";
 import Home from "./Pages/Home.jsx";
@@ -14,19 +14,21 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <NavBar balance={balance} />
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/transactions" element={<Index setBalance={setBalance} />} />
-          <Route path="/transactions/new" element={<New />} />
-          <Route path="/transactions/:id" element={<Show />} />
-          <Route path="/transactions/:id/edit" element={<Edit />} />
-          <Route path="/*" element={<Error />} />
-        </Routes>
-      </main>
+      <Router>
+        <header>
+          <NavBar balance={balance} />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/transactions" element={<Index setBalance={setBalance} />} />
+            <Route path="/transactions/new" element={<New />} />
+            <Route path="/transactions/:id" element={<Show />} />
+            <Route path="/transactions/:id/edit" element={<Edit />} />
+            <Route path="/*" element={<Error />} />
+          </Routes>
+        </main>
+      </Router>
     </div>
   );
 }

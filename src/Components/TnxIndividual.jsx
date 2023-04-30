@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { properAmount, properDate, properWord } from "../helper/proper.js";
 
 function TxnIndividual({ txn }) {
-  const { id, item_name, amount, date, from_to, tag, category } = txn;
+  const { id, item_name, amount, date, from_to, category, type } = txn;
 
   return(
     <tr className="hover:bg-gray-100">
@@ -13,9 +13,9 @@ function TxnIndividual({ txn }) {
         </Link>
       </td>
       <td className="p-2">{properWord(from_to)}</td>
-      <td className="p-2">{properWord(tag)}</td>
+      <td className="p-2">{properWord(category)}</td>
       <td className="p-2"
-        style={{"color": category.toLowerCase() === "income" ? "green" : category.toLowerCase() === "expense" ? "red" : null}}
+        style={{"color": type.toLowerCase() === "deposit" ? "green" : type.toLowerCase() === "withdrawal" ? "red" : null}}
       >
         {properAmount(parseInt(amount))}
       </td>

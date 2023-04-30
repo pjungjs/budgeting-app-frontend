@@ -5,10 +5,10 @@ const API = process.env.REACT_APP_API_URL;
 
 function TxnDetails() {
   const [theTxn, setTheTxn] = useState([]);
+  const { item_name, amount, date, from_to, category, note, type } = theTxn;
   const { id } = useParams();
   const navigate = useNavigate();
-  const { item_name, amount, date, from_to, tag, note, category } = theTxn;
-
+  
   useEffect(() => {
     async function fetchData() {
       await axios
@@ -38,22 +38,15 @@ function TxnDetails() {
           <p><strong>Date:</strong> {date}</p>
           <p>
             <strong>{
-              category === "income"
+              type === "deposit"
               ? "From: "
-              : category === "expense"
+              : type === "withdrawal"
                 ? "To: "
                 : null
             }</strong>
             {from_to}
           </p>
-          <p>
-            <strong>{
-              tag
-              ? "Tag: "
-              : null
-            }</strong>
-            {tag}
-          </p>
+          <p><strong>Category: </strong>{category}</p>
           <p>
             <strong>{
               note
@@ -62,7 +55,7 @@ function TxnDetails() {
             }</strong>
             {note}
           </p>
-          <p><strong>Category:</strong> {category}</p>
+          <p><strong>Type:</strong> {type}</p>
         </div>
         <div className="text-white flex justify-center">
           <button className="mr-2 px-3 py-1 rounded-md bg-gray-600 hover:bg-gray-400">

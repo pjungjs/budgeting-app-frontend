@@ -1,4 +1,16 @@
 
+function calculateAmount(data) {
+  let total = 0;
+  data.forEach(txn => {
+    if (txn.type.toLowerCase() === "deposit") {
+      total += parseInt(txn.amount);
+    } else if (txn.type.toLowerCase() === "withdrawal") {
+      total -= parseInt(txn.amount);
+    }
+  })
+  return total;
+}
+
 function properAmount(number) {
   return number.toLocaleString('en-US', {
     style: 'currency',
@@ -6,12 +18,17 @@ function properAmount(number) {
   })
 }
 
-function properDate(day) {
-  return day;
+function properDate(date) {
+  return newDate = new Date(date).toLocaleDateString("en-US", {
+    weekday: "short",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 function properWord(words) {
   return words.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 }
 
-module.exports = { properAmount, properDate, properWord }
+module.exports = { calculateAmount, properAmount, properDate, properWord };
